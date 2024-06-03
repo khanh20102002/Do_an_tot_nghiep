@@ -7,9 +7,10 @@ public class MainMenuManage : MonoBehaviour
 {
     public GameObject settingMenu;
     public GameObject extrasMenu;
+    public GameObject selectCharPanel;
  public void playButton()
     {
-        SceneManager.LoadScene(1);
+        selectCharPanel.SetActive(true);
     }
  public void settingButton()
     {

@@ -19,6 +19,7 @@ public class Health : MonoBehaviour
     public bool camShake = false;
     public int coinCount = 2; // Số lượng xu rơi ra
     public float dropForce = 3f; // Lực đẩy của xu khi rơi ra
+    public float dropDistance = 0f;
     private void Start()
     {
         currentHealth = maxHealth;
@@ -62,12 +63,20 @@ public class Health : MonoBehaviour
             {
                 // Tạo hiệu ứng vàng bắn ra xung quanh
                 GameObject gold = Instantiate(goldPrefab, transform.position, Quaternion.identity);
+                Vector2 randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
 
-                // Tính toán một hướng ngẫu nhiên
-                Vector2 randomDirection = UnityEngine.Random.insideUnitCircle.normalized * 0.5f; // Giảm phạm vi của hướng ngẫu nhiên
+                // Tính toán vị trí đích cách vị trí hiện tại của kẻ thù 3f theo hướng ngẫu nhiên
+                Vector2 targetPosition = (Vector2)transform.position + randomDirection * dropDistance;
+
+                // Tính toán lực cần thiết để di chuyển vàng đến vị trí đích
+                Vector2 force = randomDirection * dropForce;
 
                 // Thêm lực vào xu
                 Rigidbody2D rb = gold.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    rb.AddForce(force, ForceMode2D.Impulse);
+                }
             }
         }
     }

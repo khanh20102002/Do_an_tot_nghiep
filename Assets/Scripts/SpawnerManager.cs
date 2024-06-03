@@ -19,6 +19,7 @@ public class SpawnerManager : MonoBehaviour
     public WeaponManager weaponManager;
 
     public List<Spawner> spawners;
+    public GameObject boss;
 
     private Player player;
     int maxEnemy = 5;
@@ -101,6 +102,8 @@ public class SpawnerManager : MonoBehaviour
             roundCount++;
             if (roundCount > 10)
             {
+                int bossSpawnerIndex = UnityEngine.Random.Range(0, spawners.Count);
+                spawners[bossSpawnerIndex].spawnEnemy(boss);
                 roundCount = 0;
                 maxEnemy = Mathf.Max(enemyCount, maxEnemy + 1);
             }

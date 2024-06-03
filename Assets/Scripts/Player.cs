@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
+        characterSR = GameObject.FindObjectOfType<Animator>().GetComponent<SpriteRenderer>();
     }
     
 
